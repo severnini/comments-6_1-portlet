@@ -1,0 +1,15 @@
+			<liferay-ui:search-container-column-text name="label-col-subject" property="subject" />
+			<liferay-ui:search-container-column-text name="label-col-in-reply-to">
+				<c:set var="sourceMessage" value="${commentManagerUtil.sourceMessageOfReply( mbMessage )}" />
+				<c:if test="${not empty sourceMessage}">
+					${sourceMessage.subject}
+				</c:if>
+			</liferay-ui:search-container-column-text>  
+			<liferay-ui:search-container-column-text name="label-col-username" property="userName" orderable="true" orderableProperty="userName" />
+			<liferay-ui:search-container-column-text name="label-col-modified-date" orderable="true" orderableProperty="modifiedDate" align="center" >
+				<fmt:formatDate value="${mbMessage.modifiedDate}" pattern="dd-MM-yyyy HH:mm:ss" />
+			</liferay-ui:search-container-column-text>
+			<liferay-ui:search-container-column-text name="label-col-content-type" value=" ${commentManagerUtil.resourceType(mbMessage.classNameId, locale)}" />
+			<liferay-ui:search-container-column-text name="label-col-content-title" value="${commentManagerUtil.assetTitle(mbMessage, themeDisplay.getLocale())}" />				
+			<liferay-ui:search-container-column-text name="label-col-scope" value="${commentManagerUtil.groupName(mbMessage.groupId)}" />
+			<liferay-ui:search-container-column-jsp name="actions" path="/html/comments/_comment_actions.jsp" />
